@@ -1,0 +1,80 @@
+<html>
+<head>
+  <title>Subscriptions</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://registry.npmmirror.com/vue/3.3.11/files/dist/vue.global.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+</head>
+<body>
+  <div id="app" class="p-8 max-w-[1200px]">
+    <div class="bg-white shadow rounded-lg p-6">
+      <h2 class="text-2xl font-semibold mb-6 border-b">Subscriptions</h2>
+      <div v-for="subscription in subscriptions" :key="subscription.id" class="border-b last:border-b-0 pb-4">
+        <div class="flex justify-between items-center">
+          <div>
+            <h3 class="text-lg font-semibold">{{ subscription.title }}</h3>
+            <p class="text-gray-500">{{ subscription.license }}</p>
+          </div>
+          <div class="mt-4 bg-gray-50 p-4 rounded">
+            <p class="text-gray-700">Pricing: <span class="font-semibold">{{ subscription.pricing }}</span> <span :class="subscription.statusClass">{{ subscription.status }}</span></p>
+            <p class="text-gray-700">Start Date: {{ subscription.startDate }} | Renewal: {{ subscription.renewalDate }}</p>
+          </div>
+        </div>
+        <div class="flex space-x-2">
+          <button class="bg-red-100 text-red-500 px-4 py-1 rounded border border-red-500">{{ subscription.cancelText }}</button>
+          <button class="bg-gray-100 text-gray-700 px-4 py-1 rounded border border-gray-300">{{ subscription.updateText }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const { createApp, ref } = Vue
+    createApp({
+      setup() {
+        const subscriptions = ref([
+          {
+            id: 1,
+            title: 'FluentBooking-The Ultimate WordPress Scheduling Plugin',
+            license: 'Single Site Annual License',
+            cancelText: 'Cancel Subscription',
+            updateText: 'Update Payment',
+            pricing: '$79.00 - Yearly',
+            status: 'Active',
+            statusClass: 'text-green-500 ml-2',
+            startDate: '25 Nov, 2023',
+            renewalDate: '25 Nov, 2024'
+          },
+          {
+            id: 2,
+            title: 'FluentBooking-The Ultimate WordPress Scheduling Plugin',
+            license: 'Single Site Annual License',
+            cancelText: 'Cancel Subscription',
+            updateText: 'Update Payment',
+            pricing: '$79.00 - Yearly',
+            status: 'Cancelled',
+            statusClass: 'text-red-500 ml-2',
+            startDate: '25 Nov, 2023',
+            renewalDate: '25 Nov, 2024'
+          },
+          {
+            id: 3,
+            title: 'FluentBooking-The Ultimate WordPress Scheduling Plugin',
+            license: 'Single Site Annual License',
+            cancelText: 'Cancel Subscription',
+            updateText: 'Update Payment',
+            pricing: '$79.00 - Yearly',
+            status: 'Archive',
+            statusClass: 'text-gray-500 ml-2',
+            startDate: '25 Nov, 2023',
+            renewalDate: '25 Nov, 2024'
+          }
+        ])
+        return {
+          subscriptions
+        }
+      }
+    }).mount('#app')
+  </script>
+</body>
+</html>
